@@ -1,0 +1,337 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    min-height: 100vh;
+    color: #5d4e37;
+}
+
+/* 인트로 페이지 - 책장 넘기기 */
+.intro-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f5e6d3 0%, #d4c4b0 100%);
+}
+
+.book-container {
+    perspective: 2000px;
+}
+
+.book {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    transform-style: preserve-3d;
+    transition: transform 1.5s ease;
+    cursor: pointer;
+}
+
+.book:hover {
+    transform: scale(1.02);
+}
+
+.book.flip {
+    transform: rotateY(-180deg);
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #fff9f0 0%, #fffaf5 100%);
+    border: 2px solid #d4a574;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    backface-visibility: hidden;
+}
+
+.front-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-page {
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to left, #fff9f0 0%, #fffaf5 100%);
+    border-radius: 15px 0 0 15px;
+}
+
+.page-content {
+    text-align: center;
+    padding: 40px;
+}
+
+.page-content h1 {
+    font-size: 2.5em;
+    color: #8b6f47;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.page-content p {
+    font-size: 1.2em;
+    color: #a0826d;
+    margin-top: 10px;
+}
+
+.click-text {
+    font-size: 0.9em !important;
+    color: #b8956a;
+    margin-top: 30px !important;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.5; }
+}
+
+/* 네비게이션 */
+.navbar {
+    background: linear-gradient(135deg, #f4e4d0 0%, #e8d5c0 100%);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-container h2 {
+    color: #7d5a3b;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #8b6f47;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    background: #d4a574;
+    color: white;
+}
+
+/* 메인 컨테이너 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* 히어로 섹션 */
+.hero {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    color: #7d5a3b;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: #a0826d;
+}
+
+/* 카드 섹션 */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: linear-gradient(135deg, #fffaf5 0%, #fff5eb 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+    font-size: 3em;
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    color: #7d5a3b;
+    margin-bottom: 1rem;
+}
+
+.card p {
+    color: #a0826d;
+    line-height: 1.6;
+}
+
+/* 페이지 헤더 */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #d4a574;
+}
+
+.page-header h1 {
+    color: #7d5a3b;
+}
+
+.upload-btn {
+    background: linear-gradient(135deg, #d4a574 0%, #c89968 100%);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+    transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+}
+
+/* 갤러리 */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.photo-item {
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+    transform: scale(1.05);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.photo-info {
+    padding: 1rem;
+    background: linear-gradient(to bottom, #fffaf5 0%, #fff5eb 100%);
+}
+
+.photo-info input,
+.photo-info textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d4a574;
+    border-radius: 5px;
+    font-family: inherit;
+    color: #5d4e37;
+    background: white;
+    margin-bottom: 0.5rem;
+}
+
+.photo-info textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #d4a574;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: #d4a574;
+    color: white;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .book {
+        width: 300px;
+        height: 400px;
+    }
+
+    .page-content h1 {
+        font-size: 2em;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-menu {
+        gap: 1rem;
+    }
+
+    .page-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .photo-item img {
+        height: 150px;
+    }
+}
