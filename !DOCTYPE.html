@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고등학교 3년의 추억</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fffaf0;
+        }
+
+        /* 네비게이션 */
+        nav {
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFD700 100%);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        nav a:hover {
+            transform: scale(1.1);
+        }
+
+        /* 섹션 공통 스타일 */
+        section {
+            display: none;
+            padding: 3rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ========== 캐릭터 스타일 ========== */
+        .character {
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        .character-body {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 귀여운 동글이 캐릭터 - 기본형 */
+        .chara-basic {
+            width: 120px;
+            height: 150px;
+            background: linear-gradient(135deg, #FFB6D9 0%, #FFD9E8 100%);
+            border-radius: 50% 50% 45% 45%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* 눈 */
+        .eyes {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .eye {
+            width: 12px;
+            height: 16px;
+            background: #333;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .eye::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+        }
+
+        /* 입 */
+        .mouth {
+            width: 30px;
+            height: 20px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 30px 30px;
+            margin: 15px auto 0;
+        }
+
+        /* 뺨 */
+        .cheek {
+            position: absolute;
+            width: 20px;
+            height: 15px;
+            background: rgba(255, 192, 203, 0.6);
+            border-radius: 50%;
+        }
+
+        .cheek-left {
+            left: 15px;
+            top: 60px;
+        }
+
+        .cheek-right {
+            right: 15px;
+            top: 60px;
+        }
+
+        /* 귀 */
+        .ears {
+            position: absolute;
+            top: -20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 20px;
+        }
+
+        .ear {
+            width: 25px;
+            height: 40px;
+            background: linear-gradient(135deg, #FFD9E8 0%, #FFBDD5 100%);
+            border-radius: 50% 50% 50% 30%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .ear::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 20px;
+            background: #FFE4F0;
+            border-radius: 50%;
+            top: 10px;
+            left: 6px;
+        }
+
+        /* 팔 */
+        .arms {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .arm {
+            position: absolute;
+            width: 25px;
+            height: 70px;
+            background: linear-gradient(135deg, #FFB6D9 0%, #FFBDD5 100%);
+            border-radius: 50%;
+            top: 50px;
+        }
+
+        .arm-left {
+            left: -30px;
+            animation: wave-left 2s ease-in-out infinite;
+        }
+
+        .arm-right {
+            right: -30px;
+            animation: wave-right 2s ease-in-out infinite;
+        }
+
+        @keyframes wave-left {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-30deg); }
+        }
+
+        @keyframes wave-right {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(30deg); }
+        }
+
+        /* 발 */
+        .feet {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 30px;
+        }
+
+        .foot {
+            width: 20px;
+            height: 20px;
+            background: #FFB6D9;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 1학년 캐릭터 - 설렘 */
+        .chara-year1 {
+            background: linear-gradient(135deg, #FFD700 0%, #FFED4E 100%);
+        }
+
+        .chara-year1 .eyes {
+            margin-top: 40px;
+        }
+
+        .chara-year1 .eye {
+            width: 15px;
+            height: 18px;
+        }
+
+        /* 반짝임 효과 */
+        .sparkle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: twinkle 1.5s infinite;
+        }
+
+        .sparkle-1 { top: 10px; right: 20px; animation-delay: 0s; }
+        .sparkle-2 { top: 20px; left: 15px; animation-delay: 0.5s; }
+        .sparkle-3 { bottom: 30px; right: 10px; animation-delay: 1s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* 2학년 캐릭터 - 화이팅 */
+        .chara-year2 {
+            background: linear-gradient(135deg, #FF69B4 0%, #FFB6D9 100%);
+        }
+
+        .chara-year2 .arm-left {
+            animation: fist-left 2s ease-in-out infinite;
+        }
+
+        @keyframes fist-left {
+            0%, 100% { transform: rotate(-20deg) translateX(-5px); }
+            50% { transform: rotate(0deg) translateX(0px); }
+        }
+
+        /* 3학년 캐릭터 - 자랑스러움 */
+        .chara-year3 {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF9DCB 100%);
+        }
+
+        /* 섹션 제목 */
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #FF69B4;
+            border-bottom: 4px solid #FFB6D9;
+            padding-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* 연도별 컨텐츠 */
+        .year-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.2);
+            border: 2px solid #FFD9E8;
+            transition: transform 0.3s;
+        }
+
+        .year-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(255, 182, 193, 0.3);
+        }
+
+        .year-content h3 {
+            color: #FF69B4;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .year-content ul {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        .year-content li {
+            margin: 0.8rem 0;
+            padding-left: 0.5rem;
+            border-left: 3px solid #FFB6D9;
+            padding-left: 1rem;
+        }
+
+        /* 홈 섹션 */
+        .home {
+            text-align: center;
+            background: linear-gradient(135deg, #FFB6D9 0%, #FFD9E8 50%, #FFF0F5 100%);
+            color: #FF1493;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .home p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .home-character {
+            display: inline-block;
+            margin-top: 2rem;
+        }
+
+        /* 갤러리 */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.2);
+            transition: transform 0.3s;
+            border: 2px solid #FFD9E8;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-15px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #FFD9E8 0%, #FFF0F5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .gallery-item p {
+            padding: 1.5rem;
+            text-align: center;
+            color: #FF69B4;
+            font-weight: bold;
+        }
+
+        /* 타임라인 */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #FFB6D9, #FF69B4);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            margin-bottom: 2.5rem;
+            padding-left: 3rem;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-item::before {
+            content: '💕';
+            position: absolute;
+            left: -16px;
+            font-size: 1.8rem;
+            animation: bounce 2s infinite;
+        }
+
+        .timeline-item h4 {
+            color: #FF69B4;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* 푸터 */
+        footer {
+            background: linear-gradient(135deg, #FFB6D9 0%, #FFD700 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 15px rgba(255, 182, 193, 0.3);
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 0.8rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .home h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .chara-basic {
+                width: 80px;
+                height: 110px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav>
+        <ul>
+            <li><a onclick="showSection('home')">🏠 홈</a></li>
+            <li><a onclick="showSection('year1')">🌟 1학년</a></li>
+            <li><a onclick="showSection('year2')">💪 2학년</a></li>
+            <li><a onclick="showSection('year3
